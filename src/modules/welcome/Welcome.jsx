@@ -17,10 +17,20 @@ class Welcome extends React.Component {
     }
   }
 
+  applyComponentHandler (tries = 0) {
+    // wait 10 seconds and then throw an error
+    if (tries > 100) throw new Error('we couldn\'t find componentHandler, check if it is being loaded')
+    if (!window.componentHandler) setTimeout(() => this.applyComponentHandler(tries + 1), 100)
+    else {
+      componentHandler.upgradeDom()
+      console.log('componentHandler.upgradeDom() executed!')
+    }
+  }
+
   componentDidUpdate () {
     console.info('component did update!')
     // window.componentHandler.upgradeAllRegistered()
-    componentHandler.upgradeDom()
+    this.applyComponentHandler()
   }
 
   componentDidMount () {
