@@ -1,0 +1,11 @@
+li.inbox {
+  margin: 0 20px;
+  background: #fff;
+
+  /*transition-delay: 0.2s;*/
+  transition: margin 0.2s ease;
+}
+
+li.inbox.open {
+  margin: 20px 10px;
+}
