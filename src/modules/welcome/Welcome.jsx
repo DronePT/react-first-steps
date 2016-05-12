@@ -12,13 +12,8 @@ class Welcome extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: 0,
-      data: [
-          { open: false, label: 'John Doe', value: 'JohnDoe' },
-          { open: false, label: 'Jane Doe', value: 'JaneDoe' },
-          { open: false, label: 'André Alves', value: 'AndreAlves' },
-          { open: false, label: 'Foo bar', value: 'FooBar' }
-      ]
+      lastRowClicked: null,
+      data: []
     }
   }
 
@@ -30,33 +25,27 @@ class Welcome extends React.Component {
 
   componentDidMount () {
     console.info('component has mounted')
-    // setTimeout(() => {
-    //   window.componentHandler.upgradeAllRegistered()
-    // }, 250)
-    // window.componentHandler.upgradeAllRegistered()
-  }
-
-  handleChangeOption () {
-    // console.log(newValue)
-    // this.setState({
-    //   selected: newValue
-    // })
+    // TODO: Obter os dados atraves de XHR request à API
+    this.setState({
+      data: [
+        { open: false, label: 'John Doe', value: 'JohnDoe' },
+        { open: false, label: 'Jane Doe', value: 'JaneDoe' },
+        { open: false, label: 'Andre Alves', value: 'AndreAlves' },
+        { open: false, label: 'Foo bar', value: 'FooBar' }
+      ]
+    })
   }
 
   handleClickRow (event, index) {
-    console.log(event.target, index)
     let { data } = this.state
     data[index].open = !data[index].open
-    this.setState({ data })
+    this.setState({ data, lastRowClicked: index })
   }
 
   renderOption (data) {
     return data.map((option, i) => {
-      const { selected } = this.state
-
       let className = classNames({
-        'inbox': true,
-        'mdl-list__item': true,
+        'mdl-list__item inbox': true,
         'mdl-shadow--2dp': !option.open,
         'open mdl-shadow--6dp': option.open
       })
@@ -67,32 +56,20 @@ class Welcome extends React.Component {
               <i className='material-icons  mdl-list__item-avatar'>person</i>
               {option.label} - {option.open ? 'aberto' : 'fechado'}
             </span>
-            <span className='mdl-list__item-secondary-action'>
-              <label className='demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect' htmlFor='list-option-1'>
-                <input
-                    type='radio'
-                    id='list-option-1'
-                    className='mdl-radio__button'
-                    name='options'
-                    onClick={this.handleChangeOption}
-                    defaultChecked={selected === i}
-                />
-              </label>
-            </span>
           </li>
       )
     })
   }
 
   render () {
-    const { selected, data } = this.state
+    const { lastRowClicked, data } = this.state
 
     return (
         <div>
             <ul className='demo-list-control mdl-list'>
                 {this.renderOption(data)}
             </ul>
-            <pre>{selected}</pre>
+            <pre>Último elemento pressionado: {lastRowClicked}</pre>
         </div>
     )
   }
