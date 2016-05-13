@@ -3,12 +3,12 @@ import { render } from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import Layout from './modules/shared/Layout.jsx'
-import Welcome from './modules/welcome/Welcome.jsx'
+import List from './modules/list/List.jsx'
 
 const rootRoute = (
     <Router history={browserHistory}>
         <Route path='/' component={Layout}>
-            <IndexRoute component={Welcome} />
+            <IndexRoute component={List} />
         </Route>
     </Router>
 )

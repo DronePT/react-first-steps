@@ -2,12 +2,12 @@
 import React from 'react'
 
 /* import css */
-import '../../../static/assets/css/welcome.css'
+import '../../../static/assets/css/list.css'
 
 /* libs */
 import classNames from 'classnames'
 
-class Welcome extends React.Component {
+class List extends React.Component {
 
   constructor (props) {
     super(props)
@@ -85,4 +85,4 @@ class Welcome extends React.Component {
   }
 }
 
-export default Welcome
+export default List
